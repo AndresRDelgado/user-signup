@@ -18,7 +18,23 @@ import webapp2
 
 form = """
 <form method="post">
-    <input name="username">
+    <h2>Sign Up</h2>
+    <label>What is your username?
+        <input name="username">
+    </label>
+    <br>
+    <label>What is your password? 
+        <input name="password">
+    </label>
+    <br>
+    <label>Re-type your password
+        <input name="password2">
+    </label>
+    <br>
+    <label>What is your email address?
+        <input name="email">
+    </label>
+    <br>
     <input type="submit">
 </form>
 """
