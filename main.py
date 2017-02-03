@@ -73,26 +73,29 @@ class MainHandler(webapp2.RequestHandler):
         email = (self.request.get("email"))
         username = (self.request.get("username"))
         password = (self.request.get("password"))
-        password2 = (self.request.get("password"),self.request.get("password2")) 
+        password2 = (self.request.get("password2")) 
 
         goodemail = valid_email(email)
         goodusername = valid_username(username)
         goodpassword = valid_password(password)
         goodpassword2 = matching_password(password,password2)
 
-        error_email = "That's not a good email address!"
-        error_username = "That's not a good username!"
-        error_password = "That's not a good password!"
-        error_password2 = "Your passwords don't match!"
+        error_email = ""
+        error_username = ""
+        error_password = ""
+        error_password2 = ""
 
-        if not (goodemail or goodusername or goodpassword or goodpassword2):
-            self.write_form(error_email, error_username, error_password, error_password2, email, username, "", "")
-        elif not (goodemail or goodusername or goodpassword):
-            self.write_form(error_email, error_username, error_password, "", email, username, "","")
-        elif not (goodemail or goodusername):
-            self.write_form(error_email, error_username, "", "", email, username, "", "")
-        elif not (goodemail):
-            self.write_form(error_email, "", "", "", email, username, "", "")
+        if not (goodusername):
+            error_username = "That's not a good username!"
+        if not (goodemail):
+            error_email = "That's not a good email address!"
+        if not (goodpassword):
+            error_password = "That's not a good password!"
+        if not (goodpassword2):
+            error_password2 = "Your passwords don't match!"
+        
+        if not (goodusername and goodemail and goodpassword and goodpassword2):
+            self.write_form(error_email, error_username,  error_password, error_password2, email, username, "", "")
         else:
             self.redirect("/welcome?username="+ username)
 
