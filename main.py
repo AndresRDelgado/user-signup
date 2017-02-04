@@ -53,7 +53,7 @@ def matching_password(password, password2):
     return password == password2
 
 def valid_email(email):
-    return EMAIL_RE.match(email)
+    return EMAIL_RE.match(email) or email == ""
 
 class MainHandler(webapp2.RequestHandler):
     def write_form(self,error_email="", error_username="", error_password="", error_password2="", email="", username="", password="", password2=""):
